@@ -1,5 +1,5 @@
 import { test, expect } from '@playwright/test';
-import { InsurancePage } from './pages/insurancePage';
+import { InsurancePage } from './pages/InsurancePage';
 
 test('Insurance form POM test', async ({ page }) => {
   const insurancePage = new InsurancePage(page);
