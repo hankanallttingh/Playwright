@@ -1,5 +1,6 @@
 import { defineConfig, devices } from '@playwright/test';
-
+// tests/setup.ts
+import 'dotenv/config';
 /**
  * Read environment variables from file.
  * https://github.com/motdotla/dotenv
