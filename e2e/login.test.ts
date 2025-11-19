@@ -1,5 +1,5 @@
 import { test, expect } from '@playwright/test';
-import { LoginPage } from '../pages/loginPage';
+import { LoginPage } from '../pages/LoginPage';
 
 test('Login flow using POM', async ({ page }) => {
   const loginPage = new LoginPage(page);
