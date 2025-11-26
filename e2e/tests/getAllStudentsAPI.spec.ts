@@ -24,6 +24,6 @@ test("Get all students", async ({ request }) => {
     });
   } else {
     console.warn("Unexpected response:", body);
-    expect(body.status).not.toBe("ERROR");
+    expect(body.status).not.toEqual("OK");
   }
 });

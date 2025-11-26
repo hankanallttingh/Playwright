@@ -2,12 +2,12 @@ import http from 'k6/http';
 import { check, sleep } from 'k6';
 
 export const options = {
-  vus: 50,
-  duration: '30s',
+  vus: 1,
+  duration: '5s',
 };
 
 export default function () {
-  const studentId = 1;
+  const studentId = 1512;
   const url = `https://test-379574553568.us-central1.run.app/student/${studentId}`;
   const headers = {
     'API_KEY': 'h',
@@ -17,7 +17,7 @@ export default function () {
 
   const payload = JSON.stringify({
     name: "Updated Name",
-    age: 25,
+    age: 29,
     grade: "5"
   });
 

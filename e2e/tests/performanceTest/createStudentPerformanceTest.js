@@ -2,7 +2,7 @@ import http from 'k6/http';       // Importerar HTTP-modulen för att göra API-
 import { check, sleep } from 'k6'; // Importerar check (assert) och sleep (paus)
 
 export const options = {
-  vus: 10,                        // Antal virtuella användare (VUs) som kör samtidigt
+  vus: 100,                        // Antal virtuella användare (VUs) som kör samtidigt
   duration: '10s',                // Testets totala varaktighet
 };
 

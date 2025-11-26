@@ -7,7 +7,7 @@ test("Delete student by ID", async ({ request }) => {
     'accept': 'application/json'
   };
 
-  const studentId = 3;
+  const studentId = 2271;
   const url = `https://test-379574553568.us-central1.run.app/student/${studentId}`;
 
   const response = await request.delete(url, { headers });

@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test';
 
-/*
+
 test('Insurance form flow', async ({ page }) => {
   await page.goto('https://hoff.is/insurance/');
 
@@ -61,4 +61,3 @@ test('calculate price', async ({ page }) => {
 
 
 })
-*/

@@ -6,14 +6,14 @@ test("Update student by ID", async ({ request }) => {
     'Content-Type': 'application/json',
     'accept': 'application/json'
   };
-
-  const studentId = 1;
+//Man måste byta id varje gång man kör själva testet
+  const studentId = 775;
   const url = `https://test-379574553568.us-central1.run.app/student/${studentId}`;
 
   const payload = {
-    name: "Marcus Done",
-    age: 22,
-    grade: "5"
+    name: "Tiara Done",
+    age: 45,
+    grade: "A"
   };
 
   // Helper för logg + assert
@@ -36,7 +36,7 @@ test("Update student by ID", async ({ request }) => {
   console.log("🔍 Full Response Body:\n", JSON.stringify(body, null, 2));
 
   // Grundläggande asserts
-  expect(body.status).toBe("OK");
+  expect(body.status).toEqual("OK");
   expect(body.message).toContain(`Updated student with id: ${studentId}`);
 
   // ✅ Kontrollera att data finns innan vi gör asserts
