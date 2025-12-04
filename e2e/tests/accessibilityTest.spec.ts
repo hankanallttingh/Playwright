@@ -1,7 +1,6 @@
-import { test, expect } from '@playwright/test';
+//import { test, expect } from '@playwright/test';
 import AxeBuilder from '@axe-core/playwright';
-
-
+import { test, expect } from '../fixtures/auth.fixture';
 test.describe('Accessibility checks for refresh button', () => {
 
   test('Axe check for button accessibility', async ({ page }) => {

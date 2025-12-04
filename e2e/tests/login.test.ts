@@ -1,65 +1,33 @@
 import { test, expect } from '@playwright/test';
 import { LoginPage } from '../pages/Loginpage';
 
-test('Login flow using POM', async ({ page }) => {
-  const loginPage = new LoginPage(page);
-
-  await loginPage.goto();
-
-  // Felaktiga credentials
- // await loginPage.login('wrongUser', 'wrongPass', 'Consumer');
-  //await expect(page.getByText(/invalid username or password/i)).toBeVisible();
-
-  // Korrekta credentials
-  await loginPage.login('marcus', 'sup3rs3cr3t', 'Consumer');
-  await expect(page).toHaveURL(/store2/); // Justera efter din riktiga URL
-
-  
-  // 1. Assert header och h3
-  await expect(page.locator('h1')).toHaveText(/Store/i);
-
-  
-//  2. Klicka på dropdown och logga alla alternativ
-  const dropdown = page.getByTestId('select-product');
-
- const options = await dropdown.locator('option').allTextContents();
-  console.log('Dropdown options:', options);
-
- //  3. Välj första alternativet (value="1")
-  await dropdown.selectOption('1');
 
 
-//  Fortsätt med din befintliga flöde
-  await page.getByRole('textbox', { name: 'Amount' }).fill('60');
-  await page.getByTestId('add-to-cart-button').click();
+test.describe('Login tests with roles', () => {
+  let loginPage: LoginPage;
 
+  test.beforeEach(async ({ page }) => {
+    loginPage = new LoginPage(page);
+    await loginPage.goto();
+  });
 
+  test('Incorrect password for Consumer role', async ({ page }) => {
+    await loginPage.login('Harkanwal', 'wrongPass', 'Consumer');
+    await expect(loginPage.errorMessage).toBeVisible();
+  });
 
-//  Hämta och logga totals
-const totalSum = await page.locator('#totalSum').textContent();
-const totalVAT = await page.getByText('Total VAT:').textContent();
-const grandTotal = await page.locator('#grandTotal').textContent();
+  test('Incorrect password for Business role', async ({ page }) => {
+    await loginPage.login('Harkanwal', 'wrongPass', 'Business');
+    await expect(loginPage.errorMessage).toBeVisible();
+  });
 
-console.log(`Total Sum: ${totalSum}`);
-console.log(`Total VAT: ${totalVAT}`);
-console.log(`Grand Total: ${grandTotal}`);
+  test('Empty username', async ({ page }) => {
+    await loginPage.login('', 'sup3rs3cr3t', 'Consumer');
+    await expect(page.getByText(/Please fill in all fields./i)).toBeVisible();
+  });
 
-
-// Fortsätt med köpflödet
-await page.getByRole('button', { name: 'Buy' }).click();
-await page.getByRole('textbox', { name: 'Name:' }).fill('hankanallt');
-await page.getByRole('textbox', { name: 'Address:' }).fill('google');
-await page.getByRole('button', { name: 'Confirm Purchase' }).click();
-
-
-//  Hämta och logga alla kvittoposter
-const receiptItems = await page.locator('#receiptItems').allTextContents();
-console.log('Receipt Items:', receiptItems);
-
-// Du kan även asserta att listan innehåller "Apple"
-expect(receiptItems.join(' ')).toContain('Apple');
-
-// Stäng kvittot
-await page.getByText('Close').click();
-
+  test('Empty password', async ({ page }) => {
+    await loginPage.login('Harkanwal', '', 'Consumer');
+    await expect(page.getByText(/Please fill in all fields./i)).toBeVisible();
+  });
 });

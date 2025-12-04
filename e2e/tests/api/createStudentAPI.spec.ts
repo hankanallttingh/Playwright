@@ -1,4 +1,6 @@
-import { test, expect } from "@playwright/test";
+//import { test, expect } from "@playwright/test";
+
+import { test, expect } from "../../fixtures/api.fixture";
 
 test("Create student", async ({ request }) => {
   const headers = {

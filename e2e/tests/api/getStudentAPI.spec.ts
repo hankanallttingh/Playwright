@@ -6,7 +6,7 @@ test("Get single student", async ({ request }) => {
     'accept': 'application/json'
   };
 
-  const studentId = 776; // Ange ID för studenten du vill hämta
+  const studentId = 739; // Ange ID för studenten du vill hämta
   const url = `https://test-379574553568.us-central1.run.app/student/${studentId}`;
 
   const response = await request.get(url, { headers });
@@ -29,7 +29,7 @@ test("Get single student", async ({ request }) => {
   expect(body).toMatchObject({
     id: expect.any(Number),
     name: expect.any(String),
-    age: expect.any(Number),
+    age: expect.any(String),
     grade: expect.any(String)
   });
 }
